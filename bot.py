@@ -43,7 +43,10 @@ GREETING_RESPONSES = ["hi", "hey", "hola!", "hi there", "hello", "I am glad! You
 
 
 def greeting(sentence):
-    for word in sentence.split():
+    trans = Translator()
+    t = trans.translate(sentence)
+    t = t.text
+    for word in t.split():
         if word.lower() in GREETING_INPUTS:
             return random.choice(GREETING_RESPONSES)
 
@@ -75,13 +78,21 @@ def chat(user_response):
             return "You are welcome.."
 
         elif (greeting(user_response) != None):
-            return greeting(user_response)
+            from googletrans import Translator
+            trans = Translator()
+            t = trans.translate(user_response)
+            t = str(t.text)
+            return greeting(t)
         elif (user_response == "how are you?"):
             return "I am fine."
 
         else:
             # print(response(user_response))
-            return response(user_response)
+            from googletrans import Translator
+            trans = Translator()
+            t = trans.translate(user_response)
+            t =str(t.text)
+            return response(t)
             sent_tokens.remove(user_response)
 
 
