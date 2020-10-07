@@ -176,8 +176,14 @@ class ChatInterface(Frame):
         self.text_box.see(END)
        
         ob = chat(user_input)
-
-        pr = "KisaanSaathi : " + ob + "\n"
+        
+        from googletrans import Translator
+        trans = Translator()
+        srcLang = trans.detect(self.entry_field.get())
+        t = trans.translate(ob, dest=srcLang.lang)
+        t = t.text
+        
+        pr = "KisaanSaathi : " + t + "\n"
         self.text_box.configure(state=NORMAL)
         self.text_box.insert(END, pr)
         self.text_box.configure(state=DISABLED)
